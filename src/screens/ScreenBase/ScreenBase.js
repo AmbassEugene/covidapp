@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, useColorScheme, ScrollView} from 'react-native';
+import {useColorScheme} from 'react-native';
 import styled from 'styled-components';
 import {AppTheme} from '../../config/theme';
 

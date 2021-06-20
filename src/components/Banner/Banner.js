@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, useColorScheme} from 'react-native';
+import {useColorScheme, Modal} from 'react-native';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 import {AppTheme} from '../../config/theme';
 import {AppText, Space} from '../styles';
-import RNPickerSelect from 'react-native-picker-select';
 
 const Wrap = styled.View`
-  /* flex: 1; */
   height: 45%;
   justify-content: center;
   align-items: center;
@@ -15,15 +14,11 @@ const Wrap = styled.View`
   border-bottom-right-radius: 25px;
 `;
 
-const option = [
-  {label: 'Football', value: 'football'},
-  {label: 'Baseball', value: 'baseball'},
-  {label: 'Hockey', value: 'hockey'},
-];
-
-const Banner = ({title, subTitle, children, ...props}) => {
+const BannerBase = ({title, subTitle, children, ...props}) => {
   const [selectedLanguage, setSelectedLanguage] = useState();
   const colorScheme = useColorScheme();
+
+  // const
 
   return (
     <Wrap backgroundColor={AppTheme.PRIMARY}>
@@ -36,12 +31,24 @@ const Banner = ({title, subTitle, children, ...props}) => {
       </AppText>
 
       <Space large />
-      {/* <RNPickerSelect
-        onValueChange={value => console.log(value)}
-        items={option}
-      /> */}
+      {/* modal comes here */}
     </Wrap>
   );
 };
 
-export {Banner};
+const mapStateToProps = state => {
+  return {
+    allData: state.home.allData || [],
+    // menu: state.menu,
+    // status: state.app.orderStatus,
+    // user: state.user,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // saveData: data => dispatch(saveCovidData(data)),
+  };
+};
+
+export const Banner = connect(mapStateToProps, mapDispatchToProps)(BannerBase);

@@ -1,0 +1,2 @@
+export const GET_COVID_DATA = 'GET_COVID_DATA';
+export const SET_ACTIVE_DATA = 'SET_ACTIVE_DATA';

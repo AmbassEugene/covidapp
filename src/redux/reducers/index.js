@@ -1,8 +1,6 @@
 import {combineReducers} from 'redux';
+import {home} from './home';
 
 const initialState = {app: 'hello'};
 
-const fakeReducer = (state, action) => {
-  return (state = {happy: false});
-};
-export default combineReducers({initialState, appReducer: fakeReducer});
+export default combineReducers({initialState, home});
