@@ -1,13 +1,18 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from '../screens/homeScreen/HomeScreen';
 
 const Stack = createStackNavigator();
 
-export const Routes = () => {
+export const Routes = ({colorScheme}) => {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack.Navigator headerMode={false}>
         <Stack.Screen name="home" component={HomeScreen} />
       </Stack.Navigator>

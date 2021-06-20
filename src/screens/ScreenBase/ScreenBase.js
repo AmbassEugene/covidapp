@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, useColorScheme} from 'react-native';
+import {View, Text, useColorScheme, ScrollView} from 'react-native';
 import styled from 'styled-components';
 import {AppTheme} from '../../config/theme';
 
@@ -11,7 +11,7 @@ const Wrap = styled.View`
 const ScreenBase = ({children}) => {
   const colorScheme = useColorScheme();
   return (
-    <Wrap backgroundColor={AppTheme[colorScheme].background}>{children}</Wrap>
+    <Wrap backgroundColor={AppTheme[colorScheme].BACKGROUND}>{children}</Wrap>
   );
 };
 
