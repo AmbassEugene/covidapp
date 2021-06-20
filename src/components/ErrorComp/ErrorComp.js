@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, useColorScheme} from 'react-native';
+import {useColorScheme} from 'react-native';
 import {AppTheme} from '../../config/theme';
-import {AppText, Space, SpaceBetween} from '../styles';
+import {AppText, Space} from '../styles';
 import styled from 'styled-components';
 
 const Wrap = styled.View`
@@ -29,7 +29,7 @@ const ErrorComponent = props => {
 
       <Space size="30px" />
 
-      <RetryBtn bgc={AppTheme.PRIMARY}>
+      <RetryBtn bgc={AppTheme.PRIMARY} onPress={props.action}>
         <AppText center color={AppTheme.WHITE} semiLarge>
           Try it again
         </AppText>
