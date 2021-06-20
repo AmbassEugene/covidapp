@@ -1,15 +1,18 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, useColorScheme} from 'react-native';
 import styled from 'styled-components';
 import {AppTheme} from '../../config/theme';
 
 const Wrap = styled.View`
   flex: 1;
-  background-color: ${AppTheme.PRIMARY};
+  background-color: ${props => props.backgroundColor};
 `;
 
 const ScreenBase = ({children}) => {
-  return <Wrap>{children}</Wrap>;
+  const colorScheme = useColorScheme();
+  return (
+    <Wrap backgroundColor={AppTheme[colorScheme].background}>{children}</Wrap>
+  );
 };
 
 export {ScreenBase};
