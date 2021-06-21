@@ -42,6 +42,8 @@ export const AppText = styled.Text`
 
   text-align: ${props =>
     props.center ? 'center' : props.right ? 'right' : 'left'};
+
+  font-style: ${props => (props.italic ? 'italic' : 'normal')};
 `;
 
 export const Space = styled.View`

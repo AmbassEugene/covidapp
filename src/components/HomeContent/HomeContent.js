@@ -21,7 +21,7 @@ const HomeContentBase = props => {
 
   return (
     <Wrapper>
-      <AppText italics center color={AppTheme[colorScheme].TEXT}>
+      <AppText semiBold italic center color={AppTheme[colorScheme].TEXT}>
         As on {`${activeData.lastupdatedtime}`}
       </AppText>
       <Space size="15px" />
@@ -38,7 +38,7 @@ const DisplayTextRow = ({title, value}) => {
 
   return (
     <Row>
-      <AppText color={AppTheme[colorScheme].TEXT} semiLarge>
+      <AppText semiBold color={AppTheme[colorScheme].TEXT} semiLarge>
         {title}
       </AppText>
       <AppText color={AppTheme[colorScheme].TEXT} semiLarge>

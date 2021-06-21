@@ -1,5 +1,5 @@
 import React from 'react';
-import {useColorScheme, ScrollView} from 'react-native';
+import {useColorScheme, FlatList} from 'react-native';
 import styled from 'styled-components';
 import {AppTheme} from '../../config/theme';
 import {AppText} from '../../components/styles';
@@ -12,7 +12,7 @@ const Wrap = styled.View`
 `;
 
 const HeaderWrap = styled.View`
-  height: 10%;
+  height: 15%;
   justify-content: center;
   align-items: center;
   background-color: ${props => props.backgroundColor};
@@ -35,24 +35,21 @@ const StateScreenBase = ({navigation, ...props}) => {
 
   return (
     <ScreenBase>
-      <ScrollView>
-        <Wrap>
-          <HeaderWrap backgroundColor={AppTheme.PRIMARY}>
-            <AppText center color={AppTheme.WHITE} bold large>
-              Select State
-            </AppText>
-          </HeaderWrap>
+      <Wrap>
+        <HeaderWrap backgroundColor={AppTheme.PRIMARY}>
+          <AppText center color={AppTheme.WHITE} bold large>
+            Select State
+          </AppText>
+        </HeaderWrap>
 
-          {props.allData.map((data, index) => (
-            <StateItemList
-              action={handleStateSelect}
-              key={index}
-              stateName={data.state}
-              stateObj={data}
-            />
-          ))}
-        </Wrap>
-      </ScrollView>
+        <FlatList
+          data={props.allData}
+          renderItem={data => (
+            <StateItemList action={handleStateSelect} stateObj={data.item} />
+          )}
+          keyExtractor={item => item.id}
+        />
+      </Wrap>
     </ScreenBase>
   );
 };
@@ -65,7 +62,7 @@ const StateItemList = ({stateName, action, stateObj}) => {
       border={AppTheme[colorScheme].TEXT}
       onPress={() => action(stateObj)}>
       <AppText color={AppTheme[colorScheme].TEXT} semiLarge>
-        {stateName}
+        {stateObj.state}
       </AppText>
     </ListWrap>
   );
