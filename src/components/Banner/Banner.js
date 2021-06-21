@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
-import {useColorScheme, Modal} from 'react-native';
+import React from 'react';
+
 import styled from 'styled-components';
 import {connect} from 'react-redux';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {AppTheme} from '../../config/theme';
-import {AppText, Space} from '../styles';
+import {AppText, Space, FlexView} from '../styles';
+import {useNavigation} from '@react-navigation/native';
+import {formatString} from '../../util/formatters';
 
 const Wrap = styled.View`
   height: 45%;
@@ -14,11 +17,22 @@ const Wrap = styled.View`
   border-bottom-right-radius: 25px;
 `;
 
-const BannerBase = ({title, subTitle, children, ...props}) => {
-  const [selectedLanguage, setSelectedLanguage] = useState();
-  const colorScheme = useColorScheme();
+const StateWrap = styled.TouchableOpacity`
+  flex-direction: row;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px 15px;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-  // const
+const BannerBase = ({title, subTitle, children, ...props}) => {
+  const navigation = useNavigation();
+
+  const activeState =
+    props.activeData.state === (undefined || 'Total')
+      ? 'All States'
+      : props.activeData.state;
 
   return (
     <Wrap backgroundColor={AppTheme.PRIMARY}>
@@ -30,8 +44,22 @@ const BannerBase = ({title, subTitle, children, ...props}) => {
         {subTitle}
       </AppText>
 
-      <Space large />
-      {/* modal comes here */}
+      <Space size="20px" />
+      <FlexView style={{}}>
+        <AppText semiLarge semiBold color={AppTheme.WHITE}>
+          State
+        </AppText>
+
+        <Space large />
+
+        <StateWrap onPress={() => navigation.navigate('State')}>
+          <AppText semiLarge semiBold color={AppTheme.BLACK}>
+            {formatString(activeState)}
+          </AppText>
+          <Space size="5px" />
+          <Icon name="caretdown" size={20} color={AppTheme.BLACK} />
+        </StateWrap>
+      </FlexView>
     </Wrap>
   );
 };
@@ -39,16 +67,8 @@ const BannerBase = ({title, subTitle, children, ...props}) => {
 const mapStateToProps = state => {
   return {
     allData: state.home.allData || [],
-    // menu: state.menu,
-    // status: state.app.orderStatus,
-    // user: state.user,
+    activeData: state.home.activeData || {},
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    // saveData: data => dispatch(saveCovidData(data)),
-  };
-};
-
-export const Banner = connect(mapStateToProps, mapDispatchToProps)(BannerBase);
+export const Banner = connect(mapStateToProps, null)(BannerBase);

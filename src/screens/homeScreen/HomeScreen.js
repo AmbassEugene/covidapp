@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {useColorScheme, ScrollView} from 'react-native';
 import axios from 'axios';
 import {connect} from 'react-redux';
-
 import {Banner} from '../../components/Banner/Banner';
 import {ErrorComponent} from '../../components/ErrorComp/ErrorComp';
 import {HomeContent} from '../../components/HomeContent/HomeContent';
@@ -19,8 +17,6 @@ const Wrapper = styled.View`
 const HomeScreenBase = props => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  // const [result, setResult] = useState([]);
-  const colorScheme = useColorScheme();
 
   useEffect(() => {
     getCovidData();
@@ -31,7 +27,6 @@ const HomeScreenBase = props => {
     axios
       .get('https://api.covid19india.org/data.json')
       .then(function (response) {
-        // setResult(response.data.statewise);
         props.saveData(response.data.statewise);
         props.setActiveData(response.data.statewise[0]);
         setError(false);
@@ -46,35 +41,20 @@ const HomeScreenBase = props => {
   return (
     <ScreenBase>
       <Wrapper>
-        <ScrollView contentContainerStyle={{flex: 1}}>
-          <Banner title="Covid-19 Metrics" subTitle="India" />
+        <Banner title="Covid-19 Metrics" subTitle="India" />
 
-          {/*  */}
+        {/*  */}
 
-          {loading ? (
-            <AppLoader />
-          ) : (
-            <>
-              {error ? (
-                <ErrorComponent action={getCovidData} />
-              ) : (
-                <HomeContent />
-              )}
-            </>
-          )}
-        </ScrollView>
+        {loading ? (
+          <AppLoader />
+        ) : (
+          <>
+            {error ? <ErrorComponent action={getCovidData} /> : <HomeContent />}
+          </>
+        )}
       </Wrapper>
     </ScreenBase>
   );
-};
-
-const mapStateToProps = state => {
-  return {
-    // cart: state.cart,
-    // menu: state.menu,
-    // status: state.app.orderStatus,
-    // user: state.user,
-  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -84,7 +64,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export const HomeScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomeScreenBase);
+export const HomeScreen = connect(null, mapDispatchToProps)(HomeScreenBase);
