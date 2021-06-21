@@ -12,8 +12,6 @@ const Wrap = styled.View`
 
 const RetryBtn = styled.TouchableOpacity`
   background-color: ${props => props.bgc};
-  /* width: 50%; */
-  /* align-self: center; */
   padding: 15px 40px;
   border-radius: 15px;
 `;
