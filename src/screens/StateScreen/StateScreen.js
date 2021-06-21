@@ -44,10 +44,14 @@ const StateScreenBase = ({navigation, ...props}) => {
 
         <FlatList
           data={props.allData}
-          renderItem={data => (
-            <StateItemList action={handleStateSelect} stateObj={data.item} />
+          renderItem={({item}) => (
+            <StateItemList
+              // key={item.state}
+              action={handleStateSelect}
+              stateObj={item}
+            />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.statecode}
         />
       </Wrap>
     </ScreenBase>
